@@ -149,7 +149,8 @@ const pyb_i2c_obj_t pyb_i2c_obj[] = {
 
 #elif defined(STM32F722xx) || defined(STM32F723xx) \
     || defined(STM32F732xx) || defined(STM32F733xx) \
-    || defined(STM32F767xx) || defined(STM32F769xx)
+    || defined(STM32F765xx) || defined(STM32F767xx) \
+    || defined(STM32F769xx)
 
 // These timing values are for f_I2CCLK=54MHz and are only approximate
 #define MICROPY_HW_I2C_BAUDRATE_TIMING { \
@@ -635,7 +636,7 @@ STATIC mp_obj_t pyb_i2c_make_new(const mp_obj_type_t *type, size_t n_args, size_
 
     // work out i2c bus
     int i2c_id = 0;
-    if (MP_OBJ_IS_STR(args[0])) {
+    if (mp_obj_is_str(args[0])) {
         const char *port = mp_obj_str_get_str(args[0]);
         if (0) {
         #ifdef MICROPY_HW_I2C1_NAME
